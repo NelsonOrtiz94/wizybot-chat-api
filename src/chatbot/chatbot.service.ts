@@ -41,7 +41,7 @@ export class ChatbotService {
     ];
 
     const chatCompletion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo-0613',
+      model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: userMessage }],
       functions,
       function_call: 'auto',
@@ -58,7 +58,7 @@ export class ChatbotService {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
         const results = await this.productSearch.search(args.query);
         const followup = await openai.chat.completions.create({
-          model: 'gpt-3.5-turbo-0613',
+          model: 'gpt-3.5-turbo',
           messages: [
             { role: 'user', content: userMessage },
             message,
@@ -82,7 +82,7 @@ export class ChatbotService {
           args.to,
         );
         const followup = await openai.chat.completions.create({
-          model: 'gpt-3.5-turbo-0613',
+          model: 'gpt-3.5-turbo',
           messages: [
             { role: 'user', content: userMessage },
             message,
