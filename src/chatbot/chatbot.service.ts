@@ -51,11 +51,9 @@ export class ChatbotService {
 
     if (message.function_call) {
       const { name, arguments: argsJson } = message.function_call;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const args = JSON.parse(argsJson || '{}');
 
       if (name === 'searchProducts') {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
         const results = await this.productSearch.search(args.query);
         const followup = await openai.chat.completions.create({
           model: 'gpt-3.5-turbo',
@@ -74,11 +72,8 @@ export class ChatbotService {
 
       if (name === 'convertCurrencies') {
         const result = await this.currencyConverter.convert(
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
           args.amount,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
           args.from,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
           args.to,
         );
         const followup = await openai.chat.completions.create({
